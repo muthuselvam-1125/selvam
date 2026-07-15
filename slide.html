@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git & GitHub - Practical Guide</title>
+    <style>
+        /* Upgraded Premium Ultra-Clean Presentation UI */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0d1117 0%, #070a0e 100%);
+            color: #c9d1d9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 95vw;
+            height: 93vh;
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(88, 166, 255, 0.05);
+            position: relative;
+            padding: 40px 60px 90px 60px;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            background: rgba(22, 27, 34, 0.85);
+            backdrop-filter: blur(10px);
+        }
+        .slide {
+            display: none;
+            animation: slideFadeIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+            height: 100%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .slide.active {
+            display: flex; 
+        }
+        
+        /* Typography System */
+        h1 {
+            color: #58a6ff;
+            font-size: 3.5em;
+            margin: 0 0 15px 0;
+            text-align: center;
+            text-shadow: 0 4px 15px rgba(88, 166, 255, 0.25);
+            font-weight: 800;
+        }
+        h2 {
+            color: #2ea043;
+            font-size: 2.3em;
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 12px;
+            margin: 0 0 25px 0;
+            text-align: center;
+            width: 100%;
+            max-width: 900px;
+        }
+        p, li {
+            font-size: 1.25em;
+            line-height: 1.6;
+            color: #e6edf3;
+        }
+        .content-box {
+            width: 100%;
+            max-width: 900px;
+            text-align: left;
+        }
+        ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        li {
+            margin-bottom: 14px;
+        }
+        code {
+            background-color: #21262d;
+            padding: 4px 10px;
+            border-radius: 6px;
+            color: #ff7b72;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            border: 1px solid #30363d;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Table Styling */
+        .table-container {
+            width: 100%;
+            max-width: 950px;
+            margin-top: 10px;
+            border-collapse: collapse;
+            background-color: #0d1117;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        th, td {
+            border: 1px solid #30363d;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 1em;
+        }
+        th {
+            background-color: #21262d;
+            color: #58a6ff;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #161b22;
+        }
+
+        /* Modernized Fixed Controls Bar */
+        .controls {
+            position: absolute;
+            bottom: 25px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 60px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #238636;
+            color: white;
+            border: 1px solid rgba(240, 246, 252, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.6em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(35, 134, 54, 0.3);
+        }
+        button:hover:not(:disabled) {
+            background-color: #2ea043;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(46, 160, 67, 0.5);
+        }
+        button:disabled {
+            background-color: #21262d;
+            color: #8b949e;
+            border-color: #30363d;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        .slide-number {
+            color: #8b949e;
+            font-size: 1.2em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: #21262d;
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid #30363d;
+        }
+        
+        /* Title Layout */
+        .author-name {
+            text-align: center;
+            color: #8b949e;
+            font-size: 1.4em;
+            font-style: italic;
+            margin-top: 30px;
+            font-weight: 500;
+        }
+
+        @keyframes slideFadeIn {
+            0% { opacity: 0; transform: translateY(8px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slide-container">
+        
+        <!-- Slide 1 -->
+        <div class="slide active">
+            <h1>Git & GitHub</h1>
+            <div class="author-name">Presented by: MuthuSelvam</div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <h2>📜 History of Git</h2>
+            <div class="content-box">
+                <ul>
+                    <li><strong>Creator:</strong> Linus Torvalds (The mastermind behind the Linux Operating System).</li>
+                    <li><strong>Year:</strong> Created in 2005 (Astonishingly built in just about two weeks!).</li>
+                    <li><strong>Why it was created:</strong> To track changes for the Linux kernel project after their access to the previous tool (BitKeeper) was revoked.</li>
+                    <li><strong>Main Goal:</strong> To establish a blazing fast, decentralized architecture that works efficiently offline.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <h2>☁️ GitHub</h2>
+            <div class="content-box">
+                <ul>
+                    <li><strong>Creators:</strong> Founded by Tom Preston-Werner, Chris Wanstrath, PJ Hyett, and Scott Chacon.</li>
+                    <li><strong>Year:</strong> Officially launched to the public in 2008.</li>
+                    <li><strong>Why it was created:</strong> Git was strictly a command-line interface tool. GitHub was created to bring it to the web with an easy UI for seamless collaboration.</li>
+                    <li><strong>Current Owner:</strong> Acquired by Microsoft in 2018 for a milestone value of $7.5 billion.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <h2>⚖️ Git vs GitHub</h2>
+            <div class="content-box">
+                <ul>
+                    <li><strong>Git (2005):</strong> The core version control <em>engine/software</em> you download onto your system. It logs all adjustments offline locally.</li>
+                    <li><strong>GitHub (2008):</strong> An online cloud-hosted <em>platform</em> built to manage your Git projects. It connects developers across the globe.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <h2>1️⃣ Repository (Repo)</h2>
+            <div class="content-box">
+                <p>A Repository is the centralized digital directory or folder that stores your entire workspace, containing:</p>
+                <ul>
+                    <li>All your source code files, documents, and project configurations.</li>
+                    <li>The complete history logs tracking every incremental revision.</li>
+                    <li>Project summaries and documentation files (such as a <code>README.md</code> file).</li>
+                </ul>
+                <p><strong>Quick Steps to Create:</strong> Click the <code>+</code> top-right icon on GitHub → Choose "New repository" → Set accessibility configurations (Public/Private) → Click Create.</p>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <h2>2️⃣ Git Clone</h2>
+            <div class="content-box">
+                <p>Git Clone handles the initial operational setup for a developer on their local computer.</p>
+                <ul>
+                    <li><strong>Definition:</strong> Downloading an existing remote online project directory from GitHub onto your computer for the first time.</li>
+                    <li><strong>The Mechanism:</strong> Running the command downloads all target asset files along with the historical timeline records.</li>
+                    <li><strong>Command Usage:</strong> <code>git clone &lt;repository-url&gt;</code></li>
+                    <li><strong>Key Difference:</strong> Clone acts as the foundational building setup, while subsequent updates are fetched using a simple pull.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide">
+            <h2>💻 Terminal</h2>
+            <div class="content-box">
+                <p>A commit records a precise snapshot or historical save-state of your active project structure.</p>
+                <ul>
+                    <li><code>git add .</code> : Stages and packs <strong>all</strong> updated project files to prepare for storage.</li>
+                    <li><code>git add home.html</code> : Explicitly target packages only a <strong>specific</strong> single file.</li>
+                    <li><code>git commit -m "Message"</code> : Executes the save snapshot using a clear note summarizing the modification.</li>
+                </ul>
+                <p><strong>Common terminal commands:</strong></p>
+                <pre><code>git init
+git remote add origin https://github.com/muthuselvam-1125/presentation.html.git
+git add .
+git commit -m "first commit"
+git branch -M main
+git push -u origin main</code></pre>
+                <p><strong>Core Value:</strong> It functions like a timeline checkpoint. If a catastrophic error occurs, you can jump back to any previous working commit seamlessly.</p>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide">
+            <h2>4️⃣ Collaboration (Team Work)</h2>
+            <div class="content-box">
+                <p>Collaboration describes the multi-developer approach where a unified remote workspace handles concurrent pushes.</p>
+                <ul>
+                    <li>Project owners explicitly invite team members via "Settings" → "Collaborators".</li>
+                    <li><strong>The Production Flow:</strong>
+                        <ul>
+                            <li>Developer A pushes their local code changes up to the cloud repo.</li>
+                            <li>Developer B pulls the latest baseline code down onto their computer.</li>
+                            <li>Developer B builds additional features on top of it and pushes the work back up.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide">
+            <h2>5️⃣ Branching</h2>
+            <div class="content-box">
+                <p>Branching provides a private, isolated sandboxed workspace to build features without disrupting functional code.</p>
+                <ul>
+                    <li><strong>The Concept:</strong> Creates a parallel development universe branching away from your production-ready <code>main</code> branch.</li>
+                    <li><strong>Safety:</strong> Code changes, experiments, or errors inside a feature branch will never impact or break the stable baseline code.</li>
+                    <li><strong>Merging:</strong> Once the brand new updates are tested and verified, the changes are securely integrated back into the core version.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide">
+            <h2>6️⃣ Push & Pull</h2>
+            <div class="content-box">
+                <ul>
+                    <li><strong>Push (<code>git push</code>):</strong> Uploads your local milestones and code commits from your computer up to the GitHub repository online.</li>
+                    <li><strong>Pull (<code>git pull</code>):</strong> Downloads and instantly applies incoming edits from the online repo onto your local computer. It is critical for staying synced.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide">
+            <h2>📊 Quick Recap</h2>
+            <table class="table-container">
+                <thead>
+                    <tr>
+                        <th>Term</th>
+                        <th>Origin / Context</th>
+                        <th>Primary Mechanical Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Git</strong></td><td>2005, Linus Torvalds</td><td>Engine system that tracks version histories locally offline.</td></tr>
+                    <tr><td><strong>GitHub</strong></td><td>2008, Web Service</td><td>Cloud hosting web platform for collaborative Git projects.</td></tr>
+                    <tr><td><strong>Repo</strong></td><td>Project Root</td><td>The central digital master folder housing code and logs.</td></tr>
+                    <tr><td><strong>Clone</strong></td><td>Initial Download</td><td>Downloads a project repository locally for the first time.</td></tr>
+                    <tr><td><strong>Commit</strong></td><td>Save Point</td><td>Saves an immutable snapshot or backup phase of target files.</td></tr>
+                    <tr><td><strong>Branching</strong></td><td>Isolation Area</td><td>Parallel playground to build features safely away from main code.</td></tr>
+                    <tr><td><strong>Push / Pull</strong></td><td>Sync Actions</td><td>Pushes local uploads online / Pulls remote downloads locally.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide">
+            <h1 style="font-size: 4em; color: #2ea043; margin: 0;">🎉 Thank You!</h1>
+            <p style="margin-top: 25px; font-size: 1.6em; text-align: center;">
+               
+            </p>
+        </div>
+
+        <!-- Navigation Controls with Styled Arrow Circles -->
+        <div class="controls">
+            <button id="prevBtn" onclick="changeSlide(-1)" disabled>&lsaquo;</button>
+            <span class="slide-number" id="slideNum">1 / 12</span>
+            <button id="nextBtn" onclick="changeSlide(1)">&rsaquo;</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slideNum = document.getElementById('slideNum');
+
+        function changeSlide(direction) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide += direction;
+            
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= slides.length - 1) currentSlide = slides.length - 1;
+            
+            slides[currentSlide].classList.add('active');
+            
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === slides.length - 1;
+            
+            // Dynamic UI counter update
+            slideNum.innerText = (currentSlide + 1) + " / " + slides.length;
+        }
+    </script>
+</body>
+</html>
